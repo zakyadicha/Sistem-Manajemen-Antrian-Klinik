@@ -1,0 +1,34 @@
+import queue
+
+class Klinik:
+    def __init__(self):
+        self.antrian = queue.Queue()
+        self.kunjungan = 0
+
+    def tambah_pasien(self, nama_pasien):
+        self.antrian.put(nama_pasien)
+        print(f"{nama_pasien} telah ditambahkan ke antrian.")
+
+    def tangani_pasien(self):
+        if not self.antrian.empty():
+            pasien = self.antrian.get()
+            print(f"{pasien} sedang diperiksa.")
+            self.kunjungan += 1
+        else:
+            print("Antrian kosong, tidak ada pasien yang menunggu.")
+
+    def tampilkan_antrian(self):
+        if self.antrian.empty():
+            print("Antrian kosong.")
+        else:
+            print("Antrian pasien:")
+            while not self.antrian.empty():
+                print(self.antrian.get())
+
+# Contoh penggunaan
+klinik = Klinik()
+klinik.tambah_pasien("Haechan")
+klinik.tambah_pasien("Mark")
+klinik.tangani_pasien()
+klinik.tangani_pasien()
+klinik.tampilkan_antrian()
